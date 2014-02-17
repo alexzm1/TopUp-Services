@@ -5,34 +5,25 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd
-  http://www.springframework.org/schema/context
-  http://www.springframework.org/schema/context/spring-context.xsd
-  http://www.springframework.org/schema/security 
-  http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
     
-    <!-- To allow public access by default and to set authentication mode to basic login/password -->
-    <security:http>
-        <security:http-basic />
-    </security:http>
-
-    <!-- To delegate authorization to method calls rather than to urls -->
-    <!-- (Thus, we don't need to set any url-interceptor in this conf) -->
-    <security:global-method-security pre-post-annotations="enabled" />
- 
-    <!-- To create user/password with roles -->
-    <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user authorities="ROLE_DUMMY" 
-                   name="user" password="password" />
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>
+    <!-- Security -->
+    <http auto-config='true'>
+        <intercept-url pattern="/**" access="ROLE_USER" />
+    </http>
     
-</beans>
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user" password="password" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+    
+</beans:beans>
