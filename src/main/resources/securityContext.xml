@@ -15,8 +15,10 @@ and open the template in the editor.
     
     <!-- Security -->
     <http auto-config='true'>
-        <intercept-url pattern="/**" access="ROLE_USER" />
+        <intercept-url pattern="api/secure/**" access="ROLE_USER" />
     </http>
+    
+    <global-method-security pre-post-annotations="enabled" />
     
     <authentication-manager>
         <authentication-provider>
