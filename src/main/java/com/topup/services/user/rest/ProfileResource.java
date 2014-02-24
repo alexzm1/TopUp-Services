@@ -5,15 +5,18 @@
  */
 package com.topup.services.user.rest;
 
+import com.topup.services.common.repository.MobileNumbersRepository;
 import com.topup.services.user.model.UserProfile;
+import com.topup.services.user.service.MobileNumberService;
 import com.topup.services.user.service.UserProfileService;
+import javax.annotation.Resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +30,9 @@ public class ProfileResource {
 
     @Autowired
     private UserProfileService userProfileService;
+    
+    @Autowired
+    private MobileNumberService mobileNumberService;
 
     @GET
     @PreAuthorize("hasRole('ROLE_DUMMY')")
@@ -41,8 +47,9 @@ public class ProfileResource {
     @Produces(MediaType.APPLICATION_JSON)
     public UserProfile getMobileNumberIdStatus(@PathParam("mobile_number") String mobileNumber) {
         UserProfile profile = new UserProfile();
-        profile.setId("87362786");
-        profile.setPhoneNumber("287765654");
+        profile.setId(mobileNumber);
+        profile.setPhoneNumber(mobileNumber);
+        profile.setStatus(mobileNumberService.getNumberStatus(mobileNumber));
         return profile;
     }
 

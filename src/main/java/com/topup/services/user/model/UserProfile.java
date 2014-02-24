@@ -13,6 +13,7 @@ public class UserProfile {
 
     private String id;
     private String phoneNumber;
+    private boolean status;
 
     public String getId() {
         return id;
@@ -28,6 +29,14 @@ public class UserProfile {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
 }
