@@ -29,6 +29,6 @@
 	<bean id="userProfileService" class="com.topup.services.user.service.UserProfileServiceImpl"
 		scope="request" />
 
-	<bean id="mobileNumberService" class="com.topup.services.user.service.MobileNumberServiceImpl" />
+	<bean id="accountService" class="com.topup.services.telephone.service.AccountServiceImpl" />
 
 </beans>

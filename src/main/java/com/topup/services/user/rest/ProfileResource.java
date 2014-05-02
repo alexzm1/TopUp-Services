@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
+import com.topup.services.telephone.service.AccountService;
 import com.topup.services.user.model.UserProfile;
-import com.topup.services.user.service.MobileNumberService;
 import com.topup.services.user.service.UserProfileService;
 
 /**
@@ -29,13 +29,13 @@ public class ProfileResource {
 
 	private UserProfileService userProfileService;
 
-	private MobileNumberService mobileNumberService;
+	private AccountService accountService;
 
 	@Autowired
 	public ProfileResource(UserProfileService userProfileService,
-			MobileNumberService mobileNumberService) {
+			AccountService accountService) {
 		this.userProfileService = userProfileService;
-		this.mobileNumberService = mobileNumberService;
+		this.accountService = accountService;
 	}
 
 	@GET
@@ -46,7 +46,7 @@ public class ProfileResource {
 		UserProfile profile = new UserProfile();
 		profile.setId(mobileNumber);
 		profile.setPhoneNumber(mobileNumber);
-		profile.setStatus(mobileNumberService.getNumberStatus(mobileNumber));
+		profile.setStatus(accountService.getAccountStatus(mobileNumber));
 		return profile;
 	}
 

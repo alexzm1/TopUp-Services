@@ -7,6 +7,7 @@
 package com.topup.services.common.repository;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  *
  * @author Samuel Alejandro
  */
-@Document(collection="MobileNumber")
+@Document(collection = "MobileNumber")
 public class MobileNumbers implements Serializable {
 
 	/**
@@ -34,6 +35,24 @@ public class MobileNumbers implements Serializable {
 
 	@Field(value = "Status")
 	private boolean status;
+
+	@Field(value = "Balance")
+	private BigDecimal balance;
+
+	/**
+	 * @return the balance
+	 */
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	/**
+	 * @param balance
+	 *            the balance to set
+	 */
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
 
 	/**
 	 * @return the id
@@ -82,6 +101,7 @@ public class MobileNumbers implements Serializable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -94,6 +114,7 @@ public class MobileNumbers implements Serializable {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
