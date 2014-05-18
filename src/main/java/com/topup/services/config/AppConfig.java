@@ -1,6 +1,7 @@
 package com.topup.services.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.topup.services.user.service.UserProfileService;
@@ -14,6 +15,7 @@ import com.topup.services.user.service.UserProfileServiceImpl;
  *
  */
 @Configuration
+@ComponentScan("com.topup.services")
 public class AppConfig {
 
 	/**

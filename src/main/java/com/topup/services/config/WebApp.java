@@ -5,7 +5,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.apache.catalina.filters.CorsFilter;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -20,27 +22,10 @@ public class WebApp implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
-		setWebApplicationContext(servletContext);
+		AnnotationConfigWebApplicationContext applicationContext = getApplicationContext();
 		setFilters(servletContext);
-		setListeners(servletContext);
-
-	}
-
-	/**
-	 * Return the WebApplicationContext
-	 * 
-	 * @param servletContext
-	 *            An instance of {@link javax.servlet.ServletContext}
-	 */
-	private void setWebApplicationContext(ServletContext servletContext) {
-
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.setConfigLocation("com.topup.services");
-
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet(
-				"dispatcher", new DispatcherServlet(context));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/TopUp-Services");
+		setListeners(servletContext, applicationContext);
+		setServlet(servletContext, applicationContext);
 
 	}
 
@@ -58,13 +43,58 @@ public class WebApp implements WebApplicationInitializer {
 	}
 
 	/**
+	 * Returns the application context
+	 * 
+	 * @return an instance of
+	 *         {@link org.springframework.context.annotation.AnnotationConfigWebApplicationContext}
+	 */
+	private AnnotationConfigWebApplicationContext getApplicationContext() {
+		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(AppConfig.class);
+
+		return context;
+	}
+
+	/**
 	 * Set ServletContext listeners
 	 * 
 	 * @param servletContext
 	 *            An instance of {@link javax.servlet.ServletContext}
 	 */
-	private void setListeners(ServletContext servletContext) {
+	private void setListeners(ServletContext servletContext,
+			AnnotationConfigWebApplicationContext applicationContext) {
 
 		servletContext.addListener(new RequestContextListener());
+
+		applicationContext.setServletContext(servletContext);
+		applicationContext.refresh();
+
+		servletContext
+				.addListener(new ContextLoaderListener(applicationContext));
+
+	}
+
+	/**
+	 * Set Servlet application
+	 * 
+	 * @param servletContext
+	 *            An implementation instance of
+	 *            {@link javax.servlet.ServletContext}
+	 * @param applicationContext
+	 *            An implementation instance of
+	 *            {@link org.springframework.context.ApplicationContext}
+	 */
+	private void setServlet(ServletContext servletContext,
+			ApplicationContext applicationContext) {
+
+		AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
+		mvcContext.register(MVCConfig.class);
+		mvcContext.setParent(applicationContext);
+		mvcContext.setServletContext(servletContext);
+
+		ServletRegistration.Dynamic appServlet = servletContext.addServlet(
+				"topUpService", new DispatcherServlet(mvcContext));
+		appServlet.setLoadOnStartup(1);
+		appServlet.addMapping("/Topup-Services");
 	}
 }

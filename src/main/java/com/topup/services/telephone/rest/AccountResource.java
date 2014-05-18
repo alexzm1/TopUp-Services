@@ -1,18 +1,15 @@
 package com.topup.services.telephone.rest;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.topup.services.telephone.model.AddBalanceRequest;
-import com.topup.services.telephone.model.CreditCardRequest;
 import com.topup.services.telephone.service.AccountService;
 
 /**
@@ -21,8 +18,8 @@ import com.topup.services.telephone.service.AccountService;
  * @author alexzm1
  *
  */
-@Repository
-@Path("/api")
+@Controller
+@RequestMapping("/api")
 public class AccountResource {
 
 	private AccountService accountService;
@@ -32,26 +29,12 @@ public class AccountResource {
 		this.accountService = accountService;
 	}
 
-	@POST
-	@Path("telephone/topup/{mobile_number}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@RequestMapping(method = RequestMethod.POST, value = "telephone/topup/{mobile_number}", consumes = MediaType.APPLICATION_FORM_URLENCODED, produces = MediaType.APPLICATION_JSON)
 	public void addBalance(@PathParam("mobile_number") String mobileNumber,
-			@FormParam("amount") String amount,
-			@FormParam("creditCardNumber") String number,
-			@FormParam("expirationMonth") String expirationMonth,
-			@FormParam("expirationYear") String expirationYear,
-			@FormParam("ccv") String ccv) {
+			@RequestBody AddBalanceRequest addBalanceRequest) {
 
-		AddBalanceRequest addBalanceRequest = new AddBalanceRequest();
 		addBalanceRequest.setMobileNumber(mobileNumber);
-		addBalanceRequest.setAmount(amount);
-		addBalanceRequest.setCreditCard(new CreditCardRequest());
-		addBalanceRequest.getCreditCard().setCcv(ccv);
-		addBalanceRequest.getCreditCard().setExpirationMonth(expirationMonth);
-		addBalanceRequest.getCreditCard().setExpirationYear(expirationYear);
-		addBalanceRequest.getCreditCard().setNumber(number);
-		
+
 		accountService.addBalance(addBalanceRequest);
 
 		return;
