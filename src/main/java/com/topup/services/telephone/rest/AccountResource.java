@@ -44,19 +44,12 @@ public class AccountResource {
 			@FormParam("ccv") String ccv) {
 
 		AddBalanceRequest addBalanceRequest = new AddBalanceRequest();
-
 		addBalanceRequest.setMobileNumber(mobileNumber);
-		
 		addBalanceRequest.setAmount(amount);
-		
 		addBalanceRequest.setCreditCard(new CreditCardRequest());
-		
 		addBalanceRequest.getCreditCard().setCcv(ccv);
-		
 		addBalanceRequest.getCreditCard().setExpirationMonth(expirationMonth);
-		
 		addBalanceRequest.getCreditCard().setExpirationYear(expirationYear);
-
 		addBalanceRequest.getCreditCard().setNumber(number);
 		
 		accountService.addBalance(addBalanceRequest);
