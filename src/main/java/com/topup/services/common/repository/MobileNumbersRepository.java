@@ -12,11 +12,20 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
+ * Mobile Number mongo's repository
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
-public interface MobileNumbersRepository extends MongoRepository<MobileNumbers, String>{
-    
-    List<MobileNumbers> findByMobileNumber(String mobileNumber);
-    
+public interface MobileNumbersRepository extends
+		MongoRepository<MobileNumbers, String> {
+
+	/**
+	 * Find a list of MobileNumbers from a mobile number
+	 * 
+	 * @param mobileNumber
+	 *            Mobile Number
+	 * @return A List of MobileNumber
+	 */
+	List<MobileNumbers> findByMobileNumber(String mobileNumber);
+
 }

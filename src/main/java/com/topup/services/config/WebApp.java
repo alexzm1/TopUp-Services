@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.topup.services.config;
 
 import javax.servlet.ServletContext;
@@ -14,12 +8,12 @@ import org.apache.catalina.filters.CorsFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
+ * Web Application configuration
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public class WebApp implements WebApplicationInitializer {
 
@@ -59,10 +53,6 @@ public class WebApp implements WebApplicationInitializer {
 	private void setFilters(ServletContext servletContext) {
 
 		servletContext.addFilter("corsFilter", new CorsFilter())
-				.getUrlPatternMappings().add("/TopUp-Services");
-		servletContext
-				.addFilter("springSecurityFilterChain",
-						new DelegatingFilterProxy("springSecurityFilterChain"))
 				.getUrlPatternMappings().add("/TopUp-Services");
 
 	}

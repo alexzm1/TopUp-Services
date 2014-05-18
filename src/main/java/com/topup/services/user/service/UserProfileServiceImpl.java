@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public class UserProfileServiceImpl implements UserProfileService {
 

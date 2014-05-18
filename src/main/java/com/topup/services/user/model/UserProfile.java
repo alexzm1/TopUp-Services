@@ -7,7 +7,7 @@ package com.topup.services.user.model;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public class UserProfile {
 

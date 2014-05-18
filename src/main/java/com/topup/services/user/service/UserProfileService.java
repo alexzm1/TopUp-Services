@@ -9,7 +9,7 @@ import com.topup.services.user.model.UserProfile;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public interface UserProfileService {
 

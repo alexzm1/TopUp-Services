@@ -21,7 +21,7 @@ import com.topup.services.user.service.UserProfileService;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 @Repository
 @Path("/api")

@@ -6,27 +6,30 @@
 package com.topup.services.config;
 
 import javax.ws.rs.ext.ContextResolver;
+
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
 
 /**
+ * MOXyJson context resolver
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public class MOXyJsonContextResolver implements ContextResolver<MoxyJsonConfig> {
 
-    private final MoxyJsonConfig config;
+	private final MoxyJsonConfig config;
 
-    public MOXyJsonContextResolver() {
-        config = new MoxyJsonConfig()
-                .setAttributePrefix("")
-                .setValueWrapper("value")
-                .property(JAXBContextProperties.JSON_WRAPPER_AS_ARRAY_NAME, true);
-    }
+	public MOXyJsonContextResolver() {
+		config = new MoxyJsonConfig()
+				.setAttributePrefix("")
+				.setValueWrapper("value")
+				.property(JAXBContextProperties.JSON_WRAPPER_AS_ARRAY_NAME,
+						true);
+	}
 
-    @Override
-    public MoxyJsonConfig getContext(Class<?> type) {
-        return config;
-    }
+	@Override
+	public MoxyJsonConfig getContext(Class<?> type) {
+		return config;
+	}
 
 }

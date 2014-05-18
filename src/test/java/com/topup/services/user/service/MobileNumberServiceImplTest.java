@@ -25,7 +25,7 @@ import com.topup.services.telephone.service.AccountServiceImpl;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 @RunWith(MockitoJUnitRunner.class)
 public class MobileNumberServiceImplTest {
