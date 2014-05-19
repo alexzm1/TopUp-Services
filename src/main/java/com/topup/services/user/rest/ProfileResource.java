@@ -5,11 +5,10 @@
  */
 package com.topup.services.user.rest;
 
-import javax.ws.rs.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,7 +45,7 @@ public class ProfileResource {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "user/{mobile_number}")
 	public UserProfile getMobileNumberIdStatus(
-			@PathParam("mobile_number") String mobileNumber) {
+			@PathVariable("mobile_number") String mobileNumber) {
 		UserProfile profile = new UserProfile();
 		profile.setId(mobileNumber);
 		profile.setPhoneNumber(mobileNumber);
