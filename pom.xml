@@ -14,7 +14,6 @@
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
         <spring.version>3.2.6.RELEASE</spring.version>
         <spring.data.mongo.version>1.4.2.RELEASE</spring.data.mongo.version>
-        <mysql.version>5.1.29</mysql.version>
         <junit.version>4.11</junit.version>
     </properties>
     <name>TopUp-Services</name>
@@ -111,11 +110,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
