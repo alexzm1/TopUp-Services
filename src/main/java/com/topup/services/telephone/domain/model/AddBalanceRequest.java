@@ -1,4 +1,4 @@
-package com.topup.services.telephone.model;
+package com.topup.services.telephone.domain.model;
 
 /**
  * 

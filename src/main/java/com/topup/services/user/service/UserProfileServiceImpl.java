@@ -5,12 +5,13 @@
  */
 package com.topup.services.user.service;
 
-import com.topup.services.user.model.UserProfile;
+import com.topup.services.user.domain.model.UserProfile;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 public class UserProfileServiceImpl implements UserProfileService {
 

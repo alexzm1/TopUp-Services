@@ -7,8 +7,7 @@
 /**
  * Includes the query repositories for the TopUp database
  * 
- * @since 1.0
- * @author Samuel Zaragoza
- * @version 1.0
+ * @author alexzm1
  */
 package com.topup.services.common.repository;
+

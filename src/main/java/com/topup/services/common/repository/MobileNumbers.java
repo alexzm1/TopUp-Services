@@ -16,8 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
+ * Mobile Number mongo's document representation
  *
- * @author Samuel Alejandro
+ * @author alexzm1
  */
 @Document(collection = "MobileNumber")
 public class MobileNumbers implements Serializable {
