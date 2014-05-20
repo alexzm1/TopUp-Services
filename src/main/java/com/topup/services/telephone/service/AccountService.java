@@ -1,6 +1,6 @@
 package com.topup.services.telephone.service;
 
-import com.topup.services.telephone.model.AddBalanceRequest;
+import com.topup.services.telephone.domain.model.AddBalanceRequest;
 
 /**
  * Account service

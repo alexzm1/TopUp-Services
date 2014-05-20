@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.topup.services.common.repository.MobileNumbers;
 import com.topup.services.common.repository.MobileNumbersRepository;
-import com.topup.services.telephone.model.AddBalanceRequest;
+import com.topup.services.telephone.domain.model.AddBalanceRequest;
 
 /**
  * @author alexzm1

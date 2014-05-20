@@ -1,23 +1,26 @@
 package com.topup.services.config;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  * Web Application configuration
  *
  * @author alexzm1
  */
-public class WebApp implements WebApplicationInitializer {
+public class WebApp extends
+		AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	public void onStartup(ServletContext servletContext)
@@ -38,7 +41,7 @@ public class WebApp implements WebApplicationInitializer {
 	private void setFilters(ServletContext servletContext) {
 
 		servletContext.addFilter("corsFilter", new CorsFilter())
-				.getUrlPatternMappings().add("/TopUp-Services");
+				.getUrlPatternMappings().add("/*");
 
 	}
 
@@ -95,6 +98,31 @@ public class WebApp implements WebApplicationInitializer {
 		ServletRegistration.Dynamic appServlet = servletContext.addServlet(
 				"topUpService", new DispatcherServlet(mvcContext));
 		appServlet.setLoadOnStartup(1);
-		appServlet.addMapping("/Topup-Services");
+		appServlet.addMapping("/*");
 	}
+
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return new Class[] { MVCConfig.class };
+	}
+
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] { MVCConfig.class };
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/TopUp-Services/" };
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		characterEncodingFilter.setEncoding("UTF-8");
+		characterEncodingFilter.setForceEncoding(true);
+
+		return new Filter[] { characterEncodingFilter, new CorsFilter() };
+	}
+
 }
