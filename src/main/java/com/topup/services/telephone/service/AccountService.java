@@ -1,6 +1,7 @@
 package com.topup.services.telephone.service;
 
 import com.topup.services.telephone.domain.model.AddBalanceRequest;
+import com.topup.services.telephone.domain.model.Mobile;
 
 /**
  * Account service
@@ -21,12 +22,13 @@ public interface AccountService {
 	void addBalance(AddBalanceRequest request);
 
 	/**
-	 * Returns the Account status
+	 * Returns the matching Mobile from the DataBase
 	 * 
 	 * @param number
 	 *            Number tied to the account
-	 * @return Returns true if the Account is valid, false if it doesn't
+	 * @return Returns an instance of
+	 *         {@link com.topup.services.telephone.domain.model.Mobile}
 	 */
-	boolean getAccountStatus(String number);
+	Mobile getMobileByNumber(String number);
 
 }

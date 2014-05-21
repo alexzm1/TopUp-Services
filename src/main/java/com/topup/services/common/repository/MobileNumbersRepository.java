@@ -17,15 +17,15 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author alexzm1
  */
 public interface MobileNumbersRepository extends
-		MongoRepository<MobileNumbers, String> {
+		MongoRepository<MobileNumber, String> {
 
 	/**
 	 * Find a list of MobileNumbers from a mobile number
 	 * 
-	 * @param mobileNumber
-	 *            Mobile Number
+	 * @param number
+	 *            Number
 	 * @return A List of MobileNumber
 	 */
-	List<MobileNumbers> findByMobileNumber(String mobileNumber);
+	List<MobileNumber> findByNumber(String number);
 
 }

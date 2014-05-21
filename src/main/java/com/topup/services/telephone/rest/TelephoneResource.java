@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.topup.services.telephone.domain.model.AddBalanceRequest;
+import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.service.AccountService;
-import com.topup.services.user.domain.model.UserProfile;
 
 /**
  * Account Resource
@@ -34,20 +34,16 @@ public class TelephoneResource {
 	/**
 	 * Returns the Status of the mobile number
 	 * 
-	 * @param mobileNumber
+	 * @param number
 	 *            Mobile number
 	 * @return Instance of
-	 *         {@link com.topup.services.user.domain.model.UserProfile}
+	 *         {@link com.topup.services.telephone.domain.model.Mobile}
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{mobile_number}")
 	@ResponseStatus(HttpStatus.OK)
-	public UserProfile getMobileNumberIdStatus(
+	public Mobile getMobileStatus(
 			@PathVariable("mobile_number") String mobileNumber) {
-		UserProfile profile = new UserProfile();
-		profile.setId(mobileNumber);
-		profile.setPhoneNumber(mobileNumber);
-		profile.setStatus(accountService.getAccountStatus(mobileNumber));
-		return profile;
+		return accountService.getMobileByNumber(mobileNumber);
 	}
 
 	/**
