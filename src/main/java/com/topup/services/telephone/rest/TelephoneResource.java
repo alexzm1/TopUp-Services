@@ -40,7 +40,6 @@ public class TelephoneResource {
 	 *         {@link com.topup.services.telephone.domain.model.Mobile}
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{mobile_number}")
-	@ResponseStatus(HttpStatus.OK)
 	public Mobile getMobileStatus(
 			@PathVariable("mobile_number") String mobileNumber) {
 		return accountService.getMobileByNumber(mobileNumber);
