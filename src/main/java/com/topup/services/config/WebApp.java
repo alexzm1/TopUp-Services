@@ -28,8 +28,8 @@ public class WebApp implements WebApplicationInitializer {
 	public void onStartup(final ServletContext servletContext)
 			throws ServletException {
 		final AnnotationConfigWebApplicationContext applicationContext = getApplicationContext();
-		setListeners(servletContext, applicationContext);
-		// setFilters(servletContext);
+		servletContext
+				.addListener(new ContextLoaderListener(applicationContext));
 		setServlet(servletContext, applicationContext);
 
 	}
@@ -45,27 +45,6 @@ public class WebApp implements WebApplicationInitializer {
 		context.register(AppConfig.class);
 
 		return context;
-	}
-
-	/**
-	 * Set ServletContext listeners
-	 * 
-	 * @param servletContext
-	 *            An instance of {@link javax.servlet.ServletContext}
-	 */
-	private void setListeners(final ServletContext servletContext,
-			final AnnotationConfigWebApplicationContext applicationContext) {
-
-		/*
-		 * servletContext.addListener(new RequestContextListener());
-		 * 
-		 * applicationContext.setServletContext(servletContext);
-		 * applicationContext.refresh();
-		 */
-
-		servletContext
-				.addListener(new ContextLoaderListener(applicationContext));
-
 	}
 
 	/**
