@@ -1,6 +1,5 @@
 package com.topup.services.config;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -17,7 +16,6 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-import org.apache.catalina.filters.CorsFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +23,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WebAppTest {
@@ -59,21 +56,9 @@ public class WebAppTest {
 
 		new WebApp().onStartup(servletContext);
 
-		verify(servletContext, atLeast(1)).addFilter(Matchers.anyString(),
-				Matchers.any(Filter.class));
-
 		verify(servletContext, atLeast(1)).addListener(
 				Matchers.any(EventListener.class));
 
-	}
-
-	@Test
-	public void testFilters() {
-		Filter[] filters = new WebApp().getServletFilters();
-
-		assertTrue(filters.length == 2);
-		assertTrue(filters[0] instanceof CharacterEncodingFilter);
-		assertTrue(filters[1] instanceof CorsFilter);
 	}
 
 	/**
