@@ -1,4 +1,4 @@
-package com.topup.services.telephone.translator;
+package com.topup.services.telephone.transformer;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,25 +8,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.topup.services.common.repository.MobileNumber;
-import com.topup.services.common.translate.Translator;
+import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.Mobile.Status;
 
 /**
- * Translate an object of
+ * Transform an object of
  * {@link com.topup.services.common.repository.MobileNumber} to an object of
  * {@link com.topup.services.telephone.domain.model.Mobile}.
  * 
  * @author alexzm1
  *
  */
-@Component("mobileNumberToMobileTranslator")
-public class MobileNumberToMobileTranslator implements
-		Translator<MobileNumber, Mobile> {
+@Component("mobileNumberToMobileTransformer")
+public class MobileNumberToMobileTransformer implements
+		Transformer<MobileNumber, Mobile> {
 
 	private Map<String, Mobile.Status> status;
 
-	public MobileNumberToMobileTranslator() {
+	public MobileNumberToMobileTransformer() {
 
 		status = new HashMap<>();
 
@@ -39,11 +39,11 @@ public class MobileNumberToMobileTranslator implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.topup.services.common.translate.Translator#translate(java.lang.Object
+	 * com.topup.services.common.translate.Transformer#transform(java.lang.Object
 	 * )
 	 */
 	@Override
-	public Mobile translate(MobileNumber mobileNumber) {
+	public Mobile transform(MobileNumber mobileNumber) {
 		Mobile mobile = new Mobile();
 		mobile.setNumber(mobileNumber.getNumber());
 		if (!StringUtils.isEmpty(mobileNumber.getStatus())

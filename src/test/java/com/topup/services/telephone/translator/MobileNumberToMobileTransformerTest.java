@@ -6,10 +6,11 @@ import org.junit.Test;
 
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.telephone.domain.model.Mobile.Status;
+import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
 
-public class MobileNumberToMobileTranslatorTest {
+public class MobileNumberToMobileTransformerTest {
 
-	private MobileNumberToMobileTranslator mobileNumberToMobileTranslator = new MobileNumberToMobileTranslator();
+	private MobileNumberToMobileTransformer mobileNumberToMobileTransformer = new MobileNumberToMobileTransformer();
 
 	@Test
 	public void testStatusActive() {
@@ -19,7 +20,7 @@ public class MobileNumberToMobileTranslatorTest {
 		mobileNumber.setStatus(Status.ACTIVE.toString());
 
 		assertEquals(Status.ACTIVE,
-				mobileNumberToMobileTranslator.translate(mobileNumber)
+				mobileNumberToMobileTransformer.transform(mobileNumber)
 						.getStatus());
 
 	}
@@ -31,7 +32,7 @@ public class MobileNumberToMobileTranslatorTest {
 		mobileNumber.setNumber("8046789719");
 
 		assertEquals(Status.INVALID,
-				mobileNumberToMobileTranslator.translate(mobileNumber)
+				mobileNumberToMobileTransformer.transform(mobileNumber)
 						.getStatus());
 
 	}

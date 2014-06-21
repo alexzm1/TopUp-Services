@@ -20,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
-import com.topup.services.common.translate.Translator;
+import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.Mobile.Status;
 
@@ -38,7 +38,7 @@ public class AccountServiceImplTest {
 	private MobileNumbersRepository mobileNumberRepository;
 
 	@Mock
-	private Translator<MobileNumber, Mobile> mobileNumberToMobileTranslator;
+	private Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer;
 
 	@Before
 	public void setup() {
@@ -54,7 +54,7 @@ public class AccountServiceImplTest {
 		mobile.setNumber(mobileNumberActive.getNumber());
 		mobile.setStatus(Status.valueOf(mobileNumberActive.getStatus()));
 
-		when(mobileNumberToMobileTranslator.translate(mobileNumberActive))
+		when(mobileNumberToMobileTransformer.transform(mobileNumberActive))
 				.thenReturn(mobile);
 
 		when(mobileNumberRepository.findByNumber("8046789722")).thenReturn(

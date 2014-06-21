@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import com.topup.services.common.exception.MobileNumberNotFoundException;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
-import com.topup.services.common.translate.Translator;
+import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.AddBalanceRequest;
 import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.Mobile.Status;
@@ -27,16 +28,16 @@ public class AccountServiceImpl implements AccountService {
 
 	private final MongoTemplate template;
 	private final MobileNumbersRepository mobileNumber;
-	private final Translator<MobileNumber, Mobile> mobileNumberToMobileTranslator;
+	private final Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer;
 
 	@Autowired
 	public AccountServiceImpl(
 			final MobileNumbersRepository mobileNumber,
 			final MongoTemplate template,
-			@Qualifier("mobileNumberToMobileTranslator") final Translator<MobileNumber, Mobile> mobileNumberToMobileTranslator) {
+			@Qualifier("mobileNumberToMobileTransformer") final Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer) {
 		this.mobileNumber = mobileNumber;
 		this.template = template;
-		this.mobileNumberToMobileTranslator = mobileNumberToMobileTranslator;
+		this.mobileNumberToMobileTransformer = mobileNumberToMobileTransformer;
 	}
 
 	/*
@@ -59,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 					BigDecimal.valueOf(Double.valueOf(request.getAmount())));
 			template.save(result);
 		} else {
-
+			throw new MobileNumberNotFoundException(request.getMobileNumber());
 		}
 
 	}
@@ -82,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
 			return mobile;
 		} else {
 
-			return mobileNumberToMobileTranslator.translate(results.get(0));
+			return mobileNumberToMobileTransformer.transform(results.get(0));
 		}
 	}
 }
