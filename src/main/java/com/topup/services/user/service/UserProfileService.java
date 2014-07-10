@@ -8,6 +8,7 @@ package com.topup.services.user.service;
 import com.topup.services.user.domain.model.UserProfile;
 
 /**
+ * <b>User Profile Service</b>
  *
  * @author alexzm1
  */

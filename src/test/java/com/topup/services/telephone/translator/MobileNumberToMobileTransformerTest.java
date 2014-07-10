@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.topup.services.common.repository.MobileNumber;
-import com.topup.services.telephone.domain.model.Mobile.Status;
+import com.topup.services.telephone.domain.model.MobileStatus;
 import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
 
 public class MobileNumberToMobileTransformerTest {
@@ -17,9 +17,9 @@ public class MobileNumberToMobileTransformerTest {
 
 		MobileNumber mobileNumber = new MobileNumber();
 		mobileNumber.setNumber("8046789719");
-		mobileNumber.setStatus(Status.ACTIVE.toString());
+		mobileNumber.setStatus(MobileStatus.ACTIVE.toString());
 
-		assertEquals(Status.ACTIVE,
+		assertEquals(MobileStatus.ACTIVE,
 				mobileNumberToMobileTransformer.transform(mobileNumber)
 						.getStatus());
 
@@ -31,7 +31,7 @@ public class MobileNumberToMobileTransformerTest {
 		MobileNumber mobileNumber = new MobileNumber();
 		mobileNumber.setNumber("8046789719");
 
-		assertEquals(Status.INVALID,
+		assertEquals(MobileStatus.INVALID,
 				mobileNumberToMobileTransformer.transform(mobileNumber)
 						.getStatus());
 

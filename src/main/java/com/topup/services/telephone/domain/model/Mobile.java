@@ -1,7 +1,7 @@
 package com.topup.services.telephone.domain.model;
 
 /**
- * Mobile
+ * <b>Mobile</b>
  * 
  * @author alexzm1
  *
@@ -10,7 +10,7 @@ public class Mobile {
 
 	String number;
 
-	Status status;
+	public MobileStatus status;
 
 	/**
 	 * @return the number
@@ -30,7 +30,7 @@ public class Mobile {
 	/**
 	 * @return the status
 	 */
-	public Status getStatus() {
+	public MobileStatus getStatus() {
 		return status;
 	}
 
@@ -38,18 +38,8 @@ public class Mobile {
 	 * @param status
 	 *            the status to set
 	 */
-	public void setStatus(Status status) {
+	public void setStatus(MobileStatus status) {
 		this.status = status;
-	}
-
-	/**
-	 * Mobile Status
-	 * 
-	 * @author alexzm1
-	 *
-	 */
-	public static enum Status {
-		ACTIVE, INACTIVE, NO_REGISTER, INVALID
 	}
 
 }

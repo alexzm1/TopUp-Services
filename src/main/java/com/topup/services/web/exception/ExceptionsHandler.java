@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * <b>Exception Handler</b> Handles all the exceptions that aren't handled by
+ * other specific exception handlers
+ * 
+ * @author alexzm1
+ *
+ */
 @ControllerAdvice
 public class ExceptionsHandler {
 

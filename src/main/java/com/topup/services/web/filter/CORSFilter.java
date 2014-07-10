@@ -15,6 +15,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * <b>CORS Filter</b>
+ * 
+ * Enables Cross-origin resource sharing in all the API requests
+ * 
  * @author alexzm1
  *
  */

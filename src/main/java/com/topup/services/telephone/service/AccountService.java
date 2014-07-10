@@ -4,7 +4,7 @@ import com.topup.services.telephone.domain.model.AddBalanceRequest;
 import com.topup.services.telephone.domain.model.Mobile;
 
 /**
- * Account service
+ * <b>Account Service</b>
  * 
  * @author alexzm1
  *

@@ -1,6 +1,14 @@
 package com.topup.services.telephone.domain.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
+ * 
+ * <b>Add balance request</b>
+ * 
+ * Bean representation of the JSON request received to do a top up
  * 
  * @author alexzm1
  *
@@ -9,8 +17,12 @@ public class AddBalanceRequest {
 
 	private String mobileNumber;
 
-	private String amount;
+	@NotNull
+	@Min(value = 1)
+	private int amount;
 
+	@Valid
+	@NotNull
 	private CreditCardRequest creditCard;
 
 	/**
@@ -31,7 +43,7 @@ public class AddBalanceRequest {
 	/**
 	 * @return the amount
 	 */
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
@@ -39,14 +51,13 @@ public class AddBalanceRequest {
 	 * @param amount
 	 *            the amount to set
 	 */
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
 	/**
 	 * @return the creditCard
 	 */
-
 	public CreditCardRequest getCreditCard() {
 		return creditCard;
 	}
@@ -55,7 +66,6 @@ public class AddBalanceRequest {
 	 * @param creditCard
 	 *            the creditCard to set
 	 */
-
 	public void setCreditCard(CreditCardRequest creditCard) {
 		this.creditCard = creditCard;
 	}

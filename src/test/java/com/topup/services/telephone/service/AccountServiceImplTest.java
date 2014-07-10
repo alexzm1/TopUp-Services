@@ -22,7 +22,7 @@ import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
 import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.Mobile;
-import com.topup.services.telephone.domain.model.Mobile.Status;
+import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
  *
@@ -45,14 +45,14 @@ public class AccountServiceImplTest {
 
 		MobileNumber mobileNumberActive = new MobileNumber();
 		mobileNumberActive.setNumber("8046789719");
-		mobileNumberActive.setStatus(Status.ACTIVE.toString());
+		mobileNumberActive.setStatus(MobileStatus.ACTIVE.toString());
 
 		when(mobileNumberRepository.findByNumber("8046789719")).thenReturn(
 				Arrays.asList(mobileNumberActive));
 
 		Mobile mobile = new Mobile();
 		mobile.setNumber(mobileNumberActive.getNumber());
-		mobile.setStatus(Status.valueOf(mobileNumberActive.getStatus()));
+		mobile.setStatus(MobileStatus.valueOf(mobileNumberActive.getStatus()));
 
 		when(mobileNumberToMobileTransformer.transform(mobileNumberActive))
 				.thenReturn(mobile);
@@ -64,13 +64,13 @@ public class AccountServiceImplTest {
 
 	@Test
 	public void testValidNumber() {
-		assertEquals(Status.ACTIVE,
+		assertEquals(MobileStatus.ACTIVE,
 				accountService.getMobileByNumber("8046789719").getStatus());
 	}
 
 	@Test
 	public void testNoRegisterNumber() {
-		assertEquals(Status.NO_REGISTER,
+		assertEquals(MobileStatus.NO_REGISTER,
 				accountService.getMobileByNumber("8046789722").getStatus());
 	}
 

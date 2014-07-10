@@ -6,7 +6,7 @@ package com.topup.services.common.exception;
 import java.text.MessageFormat;
 
 /**
- * <b>MobileNumber Not Found Exception<b> Thrown when a mobile number was not
+ * <b>MobileNumber Not Found Exception</b> Thrown when a mobile number was not
  * found in the database happening in an API end point where the mobile number
  * was supposed to be already validated
  * 

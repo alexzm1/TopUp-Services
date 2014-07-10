@@ -17,7 +17,7 @@ import com.topup.services.user.domain.model.UserProfile;
 import com.topup.services.user.service.UserProfileService;
 
 /**
- * User Resource
+ * <b>User Resource</b>
  * 
  * @author alexzm1
  */

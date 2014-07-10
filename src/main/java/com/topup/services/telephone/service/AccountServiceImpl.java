@@ -17,9 +17,11 @@ import com.topup.services.common.repository.MobileNumbersRepository;
 import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.AddBalanceRequest;
 import com.topup.services.telephone.domain.model.Mobile;
-import com.topup.services.telephone.domain.model.Mobile.Status;
+import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
+ * <b>Account Service Implementation</b>
+ * 
  * @author alexzm1
  *
  */
@@ -53,14 +55,17 @@ public class AccountServiceImpl implements AccountService {
 		List<MobileNumber> results = mobileNumber.findByNumber(request
 				.getMobileNumber());
 
-		if (!results.isEmpty()) {
+		if (results.isEmpty()) {
 
-			MobileNumber result = results.get(0);
-			result.getBalance().add(
-					BigDecimal.valueOf(Double.valueOf(request.getAmount())));
-			template.save(result);
-		} else {
 			throw new MobileNumberNotFoundException(request.getMobileNumber());
+		} else if (MobileStatus.valueOf(results.get(0).getStatus()).equals(
+				MobileStatus.ACTIVE)) {
+
+		} else {
+			MobileNumber result = results.get(0);
+			result.setBalance(result.getBalance().add(
+					BigDecimal.valueOf(Double.valueOf(request.getAmount()))));
+			template.save(result);
 		}
 
 	}
@@ -78,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
 		if (results.isEmpty()) {
 			Mobile mobile = new Mobile();
 			mobile.setNumber(number);
-			mobile.setStatus(Status.NO_REGISTER);
+			mobile.setStatus(MobileStatus.NO_REGISTER);
 
 			return mobile;
 		} else {

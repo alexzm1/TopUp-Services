@@ -6,7 +6,7 @@
 package com.topup.services.user.domain.model;
 
 /**
- * User Profile
+ * <b>User Profile</b>
  *
  * @author alexzm1
  */

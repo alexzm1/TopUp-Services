@@ -1,14 +1,32 @@
 package com.topup.services.telephone.domain.model;
 
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+/**
+ * <b>Credit Card Request</b> Bean representation of the Credit Card object
+ * received in the JSON request to do a top up
+ * 
+ * @author alexzm1
+ *
+ */
 public class CreditCardRequest {
 
+	private static final String MONTH_YEAR_REGEXP = "[0-9][0-9]";
+
+	@NotEmpty
 	private String number;
 
+	@NotEmpty
+	@Pattern(regexp = MONTH_YEAR_REGEXP)
 	private String expirationMonth;
 
+	@NotEmpty
+	@Pattern(regexp = MONTH_YEAR_REGEXP)
 	private String expirationYear;
 
+	@NotEmpty
 	private String ccv;
 
 	/**

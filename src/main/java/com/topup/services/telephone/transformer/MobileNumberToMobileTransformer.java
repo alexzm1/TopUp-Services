@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.translate.Transformer;
 import com.topup.services.telephone.domain.model.Mobile;
-import com.topup.services.telephone.domain.model.Mobile.Status;
+import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
  * Transform an object of
@@ -24,13 +24,13 @@ import com.topup.services.telephone.domain.model.Mobile.Status;
 public class MobileNumberToMobileTransformer implements
 		Transformer<MobileNumber, Mobile> {
 
-	private Map<String, Mobile.Status> status;
+	private Map<String, MobileStatus> status;
 
 	public MobileNumberToMobileTransformer() {
 
 		status = new HashMap<>();
 
-		Arrays.stream(Mobile.Status.values()).forEach(
+		Arrays.stream(MobileStatus.values()).forEach(
 				statusEntry -> status.put(statusEntry.toString(), statusEntry));
 
 	}
@@ -50,7 +50,7 @@ public class MobileNumberToMobileTransformer implements
 				&& status.containsKey(mobileNumber.getStatus().toUpperCase())) {
 			mobile.setStatus(status.get(mobileNumber.getStatus().toUpperCase()));
 		} else {
-			mobile.setStatus(Status.INVALID);
+			mobile.setStatus(MobileStatus.INVALID);
 		}
 		return mobile;
 	}

@@ -5,19 +5,21 @@
  */
 package com.topup.services.user.service;
 
-import com.topup.services.user.domain.model.UserProfile;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.topup.services.user.domain.model.UserProfile;
+
 /**
- *
+ * <b>User Profile Service Implementation</b>
+ * 
  * @author alexzm1
  */
 public class UserProfileServiceImpl implements UserProfileService {
 
-    @Override
-    public UserProfile getUserProfile() {
-        return (UserProfile) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
+	@Override
+	public UserProfile getUserProfile() {
+		return (UserProfile) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+	}
 
 }
