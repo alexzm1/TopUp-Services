@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.topup.services.user.service.UserProfileService;
-import com.topup.services.user.service.UserProfileServiceImpl;
+import com.topup.services.security.service.UserProfileService;
+import com.topup.services.security.service.UserProfileServiceImpl;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class AppConfig {
 	 * Returns instance of UserProfileService for the request
 	 * 
 	 * @return A request instance of
-	 *         {@link com.topup.services.user.service.UserProfileService}
+	 *         {@link com.topup.services.security.service.UserProfileService}
 	 */
 	@Bean
 	@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.INTERFACES)
