@@ -15,15 +15,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
+ * 
+ * <b>MobileNumber</b>
+ *
  * Mobile Number mongo's document representation
  *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 @Document(collection = "MobileNumber")
 public class MobileNumber implements Serializable {
 
 	/**
-	 * 
+	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -3556804703606260498L;
 
@@ -97,6 +103,17 @@ public class MobileNumber implements Serializable {
 	 */
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+
+	/**
+	 * Add the specified amount to the balance
+	 * 
+	 * @param amount
+	 * @return An self {@link MobileNumber} instance
+	 */
+	public MobileNumber addBalance(BigDecimal amount) {
+		balance = balance.add(amount);
+		return this;
 	}
 
 	/*

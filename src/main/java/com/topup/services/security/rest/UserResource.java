@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.topup.services.security.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +12,13 @@ import com.topup.services.security.domain.model.UserProfile;
 import com.topup.services.security.service.UserProfileService;
 
 /**
- * <b>User Resource</b>
  * 
+ * <b>UserResource</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 @RestController
 @RequestMapping("/api/user")
@@ -27,6 +26,13 @@ public class UserResource {
 
 	private UserProfileService userProfileService;
 
+	/**
+	 * 
+	 * <b>Constructor</b>
+	 *
+	 * @param userProfileService
+	 *            An instance of {@link UserProfileService}
+	 */
 	@Autowired
 	public UserResource(UserProfileService userProfileService) {
 		this.userProfileService = userProfileService;
@@ -36,7 +42,7 @@ public class UserResource {
 	 * Returns the user profile for authenticated users
 	 * 
 	 * @return Instance of
-	 *         {@link com.topup.services.security.domain.model.UserProfile}
+	 *         {@link com.topup.services.user.domain.model.UserProfile}
 	 */
 	@PreAuthorize("hasRole('ROLE_DUMMY')")
 	@RequestMapping(method = RequestMethod.GET, value = "/")

@@ -1,12 +1,15 @@
 package com.topup.services.web.exception;
 
 /**
- * <b>Error Information<b>
  * 
+ * <b>ErrorInfo</b>
+ *
  * Contains all the information returned to the client if an Exception happens
  * during the request to the API.
- * 
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class ErrorInfo {
@@ -15,6 +18,14 @@ public class ErrorInfo {
 	private final String method;
 	private final String message;
 
+	/**
+	 * 
+	 * <b>Constructor</b>
+	 *
+	 * @param url
+	 * @param method
+	 * @param message
+	 */
 	public ErrorInfo(final String url, final String method, final String message) {
 		this.url = url;
 		this.method = method;

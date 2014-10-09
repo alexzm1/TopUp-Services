@@ -5,10 +5,15 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * <b>Credit Card Request</b> Bean representation of the Credit Card object
- * received in the JSON request to do a top up
  * 
+ * <b>CreditCardRequest</b>
+ *
+ * Bean representation of the Credit Card object received in the JSON request to
+ * do a top up
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class CreditCardRequest {

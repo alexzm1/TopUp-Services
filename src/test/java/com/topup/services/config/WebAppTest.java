@@ -24,6 +24,15 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockServletContext;
 
+/**
+ * 
+ * <b>WebAppTest</b>
+ *
+ * @author alexzm1
+ * @version 1.0 
+ * @since 1.0
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class WebAppTest {
 

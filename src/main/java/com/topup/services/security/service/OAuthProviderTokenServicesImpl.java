@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.topup.services.security.service;
 
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenImpl;
@@ -8,7 +5,12 @@ import org.springframework.security.oauth.provider.token.OAuthProviderTokenServi
 import org.springframework.security.oauth.provider.token.RandomValueProviderTokenServices;
 
 /**
- * @author Samuel Alejandro
+ * 
+ * <b>OAuthProviderTokenServicesImpl</b>
+ *
+ * @author alexzm1
+ * @version 1.1
+ * @since 1.1
  *
  */
 public class OAuthProviderTokenServicesImpl extends
