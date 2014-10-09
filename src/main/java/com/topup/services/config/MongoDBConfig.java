@@ -1,15 +1,17 @@
 package com.topup.services.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.WriteConcern;
 
 /**
+ * 
+ * <b>MongoDBConfig</b>
+ *
  * MongoDB Configuration class
  * 
  * <P>
@@ -18,8 +20,10 @@ import com.mongodb.WriteConcern;
  * <P>
  * Port: 27017
  * </P>
- * 
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 @Configuration
@@ -27,29 +31,31 @@ import com.mongodb.WriteConcern;
 @EnableMongoRepositories(basePackages = "com.topup.services.common.repository")
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
-	/*
+	private Mongo mongo;
+
+	/**
 	 * 
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.data.mongodb.config.AbstractMongoConfiguration#
-	 * getDatabaseName()
+	 * @param mongo
+	 *            An instance of {@link Mongo}
+	 */
+	@Autowired
+	public void setMongo(Mongo mongo) {
+		this.mongo = mongo;
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected String getDatabaseName() {
 		return "TopUp";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.data.mongodb.config.AbstractMongoConfiguration#mongo
-	 * ()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Mongo mongo() throws Exception {
-		Mongo mongo = new MongoClient("127.0.0.1");
-		mongo.setWriteConcern(WriteConcern.SAFE);
 		return mongo;
 	}
 

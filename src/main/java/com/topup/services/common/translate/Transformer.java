@@ -1,12 +1,19 @@
 package com.topup.services.common.translate;
 
 /**
+ * 
  * <b>Transformer</b>
- * 
- * Transformer one object type <b>T</b> to an object <b>S</b>
- * 
- * @author alexzm1
  *
+ * Transformer one object type <b>T</b> to an object <b>S</b>
+ *
+ * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
+ * @param <T>
+ *            Input object
+ * @param <S>
+ *            Output object
  */
 public interface Transformer<T, S> {
 

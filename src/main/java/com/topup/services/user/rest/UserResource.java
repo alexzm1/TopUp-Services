@@ -17,9 +17,13 @@ import com.topup.services.user.domain.model.UserProfile;
 import com.topup.services.user.service.UserProfileService;
 
 /**
- * <b>User Resource</b>
  * 
+ * <b>UserResource</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 @RestController
 @RequestMapping("/api/user")
@@ -27,6 +31,13 @@ public class UserResource {
 
 	private UserProfileService userProfileService;
 
+	/**
+	 * 
+	 * <b>Constructor</b>
+	 *
+	 * @param userProfileService
+	 *            An instance of {@link UserProfileService}
+	 */
 	@Autowired
 	public UserResource(UserProfileService userProfileService) {
 		this.userProfileService = userProfileService;

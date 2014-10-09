@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.translate.Transformer;
@@ -13,45 +12,34 @@ import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
- * Transform an object of
- * {@link com.topup.services.common.repository.MobileNumber} to an object of
- * {@link com.topup.services.telephone.domain.model.Mobile}.
  * 
+ * <b>MobileNumberToMobileTransformer</b>
+ *
+ * Transform an object of {@link MobileNumber} to an object of {@link Mobile}.
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 @Component("mobileNumberToMobileTransformer")
 public class MobileNumberToMobileTransformer implements
 		Transformer<MobileNumber, Mobile> {
 
-	private Map<String, MobileStatus> status;
+	private static final Map<String, MobileStatus> status = new HashMap<>();
 
-	public MobileNumberToMobileTransformer() {
-
-		status = new HashMap<>();
+	static {
 
 		Arrays.stream(MobileStatus.values()).forEach(
 				statusEntry -> status.put(statusEntry.toString(), statusEntry));
-
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.topup.services.common.translate.Transformer#transform(java.lang.Object
-	 * )
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Mobile transform(MobileNumber mobileNumber) {
-		Mobile mobile = new Mobile();
-		mobile.setNumber(mobileNumber.getNumber());
-		if (!StringUtils.isEmpty(mobileNumber.getStatus())
-				&& status.containsKey(mobileNumber.getStatus().toUpperCase())) {
-			mobile.setStatus(status.get(mobileNumber.getStatus().toUpperCase()));
-		} else {
-			mobile.setStatus(MobileStatus.INVALID);
-		}
-		return mobile;
+		return new Mobile(mobileNumber.getNumber(),
+				MobileStatus.valueFromString(mobileNumber.getStatus()));
 	}
 }

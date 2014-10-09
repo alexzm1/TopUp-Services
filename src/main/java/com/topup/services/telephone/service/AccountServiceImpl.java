@@ -3,7 +3,6 @@
  */
 package com.topup.services.telephone.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import com.topup.services.common.exception.MobileNumberInactive;
+import com.topup.services.common.exception.MobileNumberInvalid;
 import com.topup.services.common.exception.MobileNumberNotFoundException;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
@@ -20,9 +21,12 @@ import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
- * <b>Account Service Implementation</b>
  * 
+ * <b>AccountServiceImpl</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 @Service
@@ -32,6 +36,17 @@ public class AccountServiceImpl implements AccountService {
 	private final MobileNumbersRepository mobileNumber;
 	private final Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer;
 
+	/**
+	 * 
+	 * <b>Constructor</b>
+	 *
+	 * @param mobileNumber
+	 *            An instance of {@link MobileNumbersRepository}
+	 * @param template
+	 *            An instance of {@link MongoTemplate}
+	 * @param mobileNumberToMobileTransformer
+	 *            An instance of {@link Transformer<MobileNumber, Mobile>}
+	 */
 	@Autowired
 	public AccountServiceImpl(
 			final MobileNumbersRepository mobileNumber,
@@ -42,53 +57,46 @@ public class AccountServiceImpl implements AccountService {
 		this.mobileNumberToMobileTransformer = mobileNumberToMobileTransformer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.topup.services.telephone.service.AccountService#addBalance(com.topup
-	 * .services.telephone.model.AddBalanceRequest)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void addBalance(AddBalanceRequest request) {
 
-		List<MobileNumber> results = mobileNumber.findByNumber(request
+		final List<MobileNumber> results = mobileNumber.findByNumber(request
 				.getMobileNumber());
 
 		if (results.isEmpty()) {
 
 			throw new MobileNumberNotFoundException(request.getMobileNumber());
-		} else if (MobileStatus.valueOf(results.get(0).getStatus()).equals(
-				MobileStatus.ACTIVE)) {
+		}
 
-		} else {
-			MobileNumber result = results.get(0);
-			result.setBalance(result.getBalance().add(
-					BigDecimal.valueOf(Double.valueOf(request.getAmount()))));
-			template.save(result);
+		final MobileNumber mobileNumber = results.get(0);
+
+		switch (MobileStatus.valueFromString(mobileNumber.getStatus())) {
+		case ACTIVE:
+
+			template.save(mobileNumber.addBalance(request.getAmount()));
+			break;
+		case INVALID:
+
+			throw new MobileNumberInvalid(request.getMobileNumber());
+		case INACTIVE:
+		case NO_REGISTER:
+
+			throw new MobileNumberInactive(request.getMobileNumber());
+
 		}
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.topup.services.telephone.service.AccountService#getMobileByNumber
-	 * (java.lang.String)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Mobile getMobileByNumber(String number) {
-		List<MobileNumber> results = mobileNumber.findByNumber(number);
-		if (results.isEmpty()) {
-			Mobile mobile = new Mobile();
-			mobile.setNumber(number);
-			mobile.setStatus(MobileStatus.NO_REGISTER);
-
-			return mobile;
-		} else {
-
-			return mobileNumberToMobileTransformer.transform(results.get(0));
-		}
+		final List<MobileNumber> results = mobileNumber.findByNumber(number);
+		return results.isEmpty() ? new Mobile(number, MobileStatus.NO_REGISTER)
+				: mobileNumberToMobileTransformer.transform(results.get(0));
 	}
 }

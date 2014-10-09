@@ -8,6 +8,15 @@ import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.telephone.domain.model.MobileStatus;
 import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
 
+/**
+ * 
+ * <b>MobileNumberToMobileTransformerTest</b>
+ *
+ * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class MobileNumberToMobileTransformerTest {
 
 	private MobileNumberToMobileTransformer mobileNumberToMobileTransformer = new MobileNumberToMobileTransformer();
@@ -19,9 +28,8 @@ public class MobileNumberToMobileTransformerTest {
 		mobileNumber.setNumber("8046789719");
 		mobileNumber.setStatus(MobileStatus.ACTIVE.toString());
 
-		assertEquals(MobileStatus.ACTIVE,
-				mobileNumberToMobileTransformer.transform(mobileNumber)
-						.getStatus());
+		assertEquals(MobileStatus.ACTIVE, mobileNumberToMobileTransformer
+				.transform(mobileNumber).getStatus());
 
 	}
 
@@ -31,9 +39,8 @@ public class MobileNumberToMobileTransformerTest {
 		MobileNumber mobileNumber = new MobileNumber();
 		mobileNumber.setNumber("8046789719");
 
-		assertEquals(MobileStatus.INVALID,
-				mobileNumberToMobileTransformer.transform(mobileNumber)
-						.getStatus());
+		assertEquals(MobileStatus.INVALID, mobileNumberToMobileTransformer
+				.transform(mobileNumber).getStatus());
 
 	}
 }

@@ -8,12 +8,21 @@ package com.topup.services.user.service;
 import com.topup.services.user.domain.model.UserProfile;
 
 /**
- * <b>User Profile Service</b>
+ * 
+ * <b>UserProfileService</b>
  *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 public interface UserProfileService {
 
-    UserProfile getUserProfile();
+	/**
+	 * Returns an instance of {@link UserProfile}
+	 * 
+	 * @return An instance of {@link UserProfile}
+	 */
+	UserProfile getUserProfile();
 
 }
