@@ -3,7 +3,6 @@
  */
 package com.topup.services.common.exception;
 
-
 /**
  * <b>MobileNumberInactive</b>
  *
