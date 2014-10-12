@@ -20,7 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
-import com.topup.services.common.translate.Transformer;
+import com.topup.services.common.transform.Transformer;
 import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.MobileStatus;
 

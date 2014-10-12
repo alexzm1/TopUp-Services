@@ -1,4 +1,4 @@
-package com.topup.services.telephone.translator;
+package com.topup.services.telephone.transform;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.telephone.domain.model.MobileStatus;
-import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
+import com.topup.services.telephone.transform.MobileNumberToMobileTransformer;
 
 /**
  * 

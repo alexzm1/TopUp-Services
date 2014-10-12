@@ -1,12 +1,8 @@
-/**
- * 
- */
 package com.topup.services.telephone.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +11,7 @@ import com.topup.services.common.exception.MobileNumberInvalid;
 import com.topup.services.common.exception.MobileNumberNotFoundException;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
-import com.topup.services.common.translate.Transformer;
+import com.topup.services.common.transform.Transformer;
 import com.topup.services.telephone.domain.model.AddBalanceRequest;
 import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.MobileStatus;
@@ -25,7 +21,7 @@ import com.topup.services.telephone.domain.model.MobileStatus;
  * <b>AccountServiceImpl</b>
  *
  * @author alexzm1
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  *
  */
@@ -51,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
 	public AccountServiceImpl(
 			final MobileNumbersRepository mobileNumber,
 			final MongoTemplate template,
-			@Qualifier("mobileNumberToMobileTransformer") final Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer) {
+			final Transformer<MobileNumber, Mobile> mobileNumberToMobileTransformer) {
 		this.mobileNumber = mobileNumber;
 		this.template = template;
 		this.mobileNumberToMobileTransformer = mobileNumberToMobileTransformer;
