@@ -19,8 +19,8 @@ import com.topup.services.security.domain.model.Authorities;
  * <b>OAuthProviderTokenImplToTokenTransformerTest</b>
  *
  * @author alexzm1
- * @version
- * @since
+ * @version 1.1
+ * @since 1.1
  *
  */
 public class OAuthProviderTokenImplToTokenTransformerTest {
