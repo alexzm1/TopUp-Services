@@ -2,6 +2,7 @@ package com.topup.services.security.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenImpl;
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenServices;
 import org.springframework.security.oauth.provider.token.RandomValueProviderTokenServices;
@@ -43,6 +44,7 @@ public class OAuthProviderTokenServicesImpl extends
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Cacheable("tokens")
 	protected OAuthProviderTokenImpl readToken(String token) {
 		final Token tokenEntity = tokenRepository.findById(token).get(0);
 		final OAuthProviderTokenImpl oAuthToken = tokenToOAuthProviderTokenImplTransformer
@@ -50,7 +52,7 @@ public class OAuthProviderTokenServicesImpl extends
 		if (tokenEntity.isAccessToken
 				&& !StringUtils.isEmpty(tokenEntity.getUserName())) {
 
-			// TODO: Bing Authentication Principal and add it to the oAuthToken
+			// TODO: Bring Authentication Principal and add it to the oAuthToken
 			throw new UnsupportedOperationException(
 					"Authentication Token not supported yet");
 		}
@@ -71,6 +73,7 @@ public class OAuthProviderTokenServicesImpl extends
 		tokenEntity.setConsumerKey(token.getSecret());
 		tokenEntity.setTimestamp(token.getTimestamp());
 		tokenEntity.setAccessToken(token.isAccessToken());
+		
 		tokenRepository.save(tokenEntity);
 	}
 

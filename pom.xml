@@ -14,10 +14,10 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<spring.security.oauth.version>2.0.3.RELEASE</spring.security.oauth.version>
-		<spring.version>4.0.7.RELEASE</spring.version>
+		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.data.mongo.version>1.6.0.RELEASE</spring.data.mongo.version>
 		<junit.version>4.11</junit.version>
-		<jackson.version>2.3.3</jackson.version>
+		<jackson.version>2.4.0</jackson.version>
 	</properties>
 	<name>TopUp-Services</name>
 	<build>
@@ -61,6 +61,16 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

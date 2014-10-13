@@ -28,6 +28,7 @@ public class TokenToOAuthProviderTokenImplTransformer implements
 		oauthToken.setTimestamp(token.getTimestamp());
 		oauthToken.setVerifier(token.getVerifier());
 		oauthToken.setAccessToken(token.isAccessToken);
+		
 		return oauthToken;
 	}
 
