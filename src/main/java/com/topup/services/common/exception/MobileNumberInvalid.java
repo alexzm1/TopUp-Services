@@ -25,7 +25,7 @@ public class MobileNumberInvalid extends RuntimeException {
 	public MobileNumberInvalid(String mobileNumber) {
 		super(
 				String.format(
-						"Mobile Number %d is currently in an invalid state service, please try again with a valid mobile number",
+						"Mobile Number %s is currently in an invalid state service, please try again with a valid mobile number",
 						mobileNumber));
 	}
 

@@ -27,6 +27,8 @@ public class OAuthProviderTokenServicesImpl extends
 
 	private final Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer;
 
+	private final Transformer<OAuthProviderTokenImpl, Token> oAuthProviderTokenImplToTokenTransformer;
+
 	/**
 	 * <b>Constructor</b>
 	 *
@@ -35,9 +37,11 @@ public class OAuthProviderTokenServicesImpl extends
 	@Autowired
 	public OAuthProviderTokenServicesImpl(
 			TokenRepository tokenRepository,
-			Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer) {
+			Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer,
+			Transformer<OAuthProviderTokenImpl, Token> oAuthProviderTokenImplToTokenTransformer) {
 		this.tokenRepository = tokenRepository;
 		this.tokenToOAuthProviderTokenImplTransformer = tokenToOAuthProviderTokenImplTransformer;
+		this.oAuthProviderTokenImplToTokenTransformer = oAuthProviderTokenImplToTokenTransformer;
 	}
 
 	/**
@@ -65,16 +69,9 @@ public class OAuthProviderTokenServicesImpl extends
 	 */
 	@Override
 	protected void storeToken(String tokenValue, OAuthProviderTokenImpl token) {
-		final Token tokenEntity = new Token();
-		tokenEntity.setId(token.getValue());
-		tokenEntity.setConsumerKey(token.getConsumerKey());
-		tokenEntity.setVerifier(token.getVerifier());
-		tokenEntity.setUserName(token.getUserAuthentication().getName());
-		tokenEntity.setConsumerKey(token.getSecret());
-		tokenEntity.setTimestamp(token.getTimestamp());
-		tokenEntity.setAccessToken(token.isAccessToken());
-		
-		tokenRepository.save(tokenEntity);
+
+		tokenRepository.save(oAuthProviderTokenImplToTokenTransformer
+				.transform(token));
 	}
 
 	/**

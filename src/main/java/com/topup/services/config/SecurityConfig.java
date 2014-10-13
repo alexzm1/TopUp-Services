@@ -2,10 +2,14 @@ package com.topup.services.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.topup.services.security.domain.model.Authorities;
 
 /**
  * 
@@ -22,6 +26,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private UserDetailsService userDetailsServiceImpl;
+
+	/**
+	 * <B>NOTE:</B> Use only for Unit Testing purpose
+	 * 
+	 * @param userDetailsServiceImpl
+	 *            the userDetailsServiceImpl to set
+	 */
+	void setUserDetailsServiceImpl(UserDetailsService userDetailsServiceImpl) {
+		this.userDetailsServiceImpl = userDetailsServiceImpl;
+	}
+
 	/**
 	 * Configure global authentication manager
 	 * 
@@ -34,9 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(
 			AuthenticationManagerBuilder authenticationManagerBuilder)
 			throws Exception {
-
-		authenticationManagerBuilder.inMemoryAuthentication().withUser("user")
-				.password("password").authorities("ROLE_USER");
+		final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsServiceImpl);
+		authenticationManagerBuilder
+				.authenticationProvider(authenticationProvider);
 	}
 
 	/**
@@ -44,7 +62,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").permitAll()
-				.antMatchers("api/secure/**").hasRole("USER");
+		http.authorizeRequests()
+				.antMatchers("/**")
+				.permitAll()
+				.antMatchers("api/secure/**")
+				.hasAnyAuthority(Authorities.ADMIN_USER.toString(),
+						Authorities.MOBILE_USER.toString());
 	}
 }

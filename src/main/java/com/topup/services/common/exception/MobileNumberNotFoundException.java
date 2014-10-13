@@ -28,7 +28,7 @@ public class MobileNumberNotFoundException extends RuntimeException {
 	public MobileNumberNotFoundException(String mobileNumber) {
 		super(
 				String.format(
-						"Mobile Number %d is not a mobile number we give service, please try again with a valid mobile number",
+						"Mobile Number %s is not a mobile number we give service, please try again with a valid mobile number",
 						mobileNumber));
 	}
 

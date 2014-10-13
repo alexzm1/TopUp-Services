@@ -27,8 +27,11 @@ import com.mongodb.Mongo;
  *
  */
 @Configuration
-@ComponentScan(basePackages = "com.topup.services.common.repository")
-@EnableMongoRepositories(basePackages = "com.topup.services.common.repository")
+@ComponentScan(basePackages = { "com.topup.services.common.repository",
+		"com.topup.services.security.repository" })
+@EnableMongoRepositories(basePackages = {
+		"com.topup.services.common.repository",
+		"com.topup.services.security.repository" })
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
 	private Mongo mongo;

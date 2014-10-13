@@ -27,7 +27,7 @@ public class MobileNumberInactive extends RuntimeException {
 	public MobileNumberInactive(String mobileNumber) {
 		super(
 				String.format(
-						"Mobile Number %d is currently in an inactive state of service, please try again with a valid mobile number",
+						"Mobile Number %s is currently in an inactive state of service, please try again with a valid mobile number",
 						mobileNumber));
 	}
 }
