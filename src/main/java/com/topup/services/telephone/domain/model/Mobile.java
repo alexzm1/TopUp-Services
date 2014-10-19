@@ -1,16 +1,31 @@
 package com.topup.services.telephone.domain.model;
 
 /**
- * <b>Mobile</b>
  * 
+ * <b>Mobile</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class Mobile {
 
-	String number;
+	private final String number;
 
-	public MobileStatus status;
+	private final MobileStatus status;
+
+	/**
+	 * <b>Constructor</b>
+	 *
+	 * @param number
+	 * @param status
+	 *            An instance of {@link MobileStatus}
+	 */
+	public Mobile(String number, MobileStatus status) {
+		this.number = number;
+		this.status = status;
+	}
 
 	/**
 	 * @return the number
@@ -20,26 +35,10 @@ public class Mobile {
 	}
 
 	/**
-	 * @param number
-	 *            the number to set
-	 */
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	/**
 	 * @return the status
 	 */
 	public MobileStatus getStatus() {
 		return status;
-	}
-
-	/**
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(MobileStatus status) {
-		this.status = status;
 	}
 
 }

@@ -1,16 +1,20 @@
 package com.topup.services.telephone.domain.model;
 
+import java.math.BigDecimal;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
  * 
- * <b>Add balance request</b>
- * 
+ * <b>AddBalanceRequest</b>
+ *
  * Bean representation of the JSON request received to do a top up
- * 
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 public class AddBalanceRequest {
@@ -19,7 +23,7 @@ public class AddBalanceRequest {
 
 	@NotNull
 	@Min(value = 1)
-	private int amount;
+	private BigDecimal amount;
 
 	@Valid
 	@NotNull
@@ -43,7 +47,7 @@ public class AddBalanceRequest {
 	/**
 	 * @return the amount
 	 */
-	public int getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
@@ -51,7 +55,7 @@ public class AddBalanceRequest {
 	 * @param amount
 	 *            the amount to set
 	 */
-	public void setAmount(int amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

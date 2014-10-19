@@ -25,8 +25,13 @@ import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.domain.model.MobileStatus;
 
 /**
+ * 
+ * <b>AccountServiceImplTest</b>
  *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceImplTest {
@@ -50,12 +55,10 @@ public class AccountServiceImplTest {
 		when(mobileNumberRepository.findByNumber("8046789719")).thenReturn(
 				Arrays.asList(mobileNumberActive));
 
-		Mobile mobile = new Mobile();
-		mobile.setNumber(mobileNumberActive.getNumber());
-		mobile.setStatus(MobileStatus.valueOf(mobileNumberActive.getStatus()));
-
 		when(mobileNumberToMobileTransformer.transform(mobileNumberActive))
-				.thenReturn(mobile);
+				.thenReturn(
+						new Mobile(mobileNumberActive.getNumber(), MobileStatus
+								.valueOf(mobileNumberActive.getStatus())));
 
 		when(mobileNumberRepository.findByNumber("8046789722")).thenReturn(
 				new ArrayList<MobileNumber>());
@@ -70,8 +73,8 @@ public class AccountServiceImplTest {
 
 	@Test
 	public void testNoRegisterNumber() {
-		assertEquals(MobileStatus.NO_REGISTER,
-				accountService.getMobileByNumber("8046789722").getStatus());
+		assertEquals(MobileStatus.NO_REGISTER, accountService
+				.getMobileByNumber("8046789722").getStatus());
 	}
 
 }

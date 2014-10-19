@@ -8,9 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * Spring Security Configuration
  * 
+ * <b>SecurityConfig</b>
+ *
+ * Spring Security Configuration
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 @Configuration
@@ -34,13 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.password("password").authorities("ROLE_USER");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.config.annotation.web.configuration.
-	 * WebSecurityConfigurerAdapter
-	 * #configure(org.springframework.security.config
-	 * .annotation.web.builders.HttpSecurity)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

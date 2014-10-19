@@ -4,9 +4,12 @@ import com.topup.services.telephone.domain.model.AddBalanceRequest;
 import com.topup.services.telephone.domain.model.Mobile;
 
 /**
- * <b>Account Service</b>
  * 
+ * <b>AccountService</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 public interface AccountService {

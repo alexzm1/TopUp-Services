@@ -11,18 +11,20 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
+ * 
+ * <b>WebApp</b>
+ *
  * Web Application configuration
  *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 public class WebApp implements WebApplicationInitializer {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet
-	 * .ServletContext)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void onStartup(final ServletContext servletContext)

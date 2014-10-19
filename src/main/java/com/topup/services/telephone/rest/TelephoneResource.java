@@ -18,9 +18,12 @@ import com.topup.services.telephone.domain.model.Mobile;
 import com.topup.services.telephone.service.AccountService;
 
 /**
- * <b>Account Resource</b>
  * 
+ * <b>TelephoneResource</b>
+ *
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
  *
  */
 @RestController
@@ -29,6 +32,13 @@ public class TelephoneResource {
 
 	private final AccountService accountService;
 
+	/**
+	 * 
+	 * <b>Constructor</b>
+	 *
+	 * @param accountService
+	 *            An instance of {@link AccountService}
+	 */
 	@Autowired
 	public TelephoneResource(final AccountService accountService) {
 		this.accountService = accountService;

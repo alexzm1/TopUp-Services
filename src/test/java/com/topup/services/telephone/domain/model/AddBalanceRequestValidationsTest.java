@@ -2,6 +2,7 @@ package com.topup.services.telephone.domain.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,6 +12,15 @@ import javax.validation.Validator;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * <b>AddBalanceRequestValidationsTest</b>
+ *
+ * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class AddBalanceRequestValidationsTest {
 
 	private Validator validator;
@@ -31,7 +41,7 @@ public class AddBalanceRequestValidationsTest {
 
 	private static AddBalanceRequest createTestRequest() {
 		final AddBalanceRequest addBalanceRequest = new AddBalanceRequest();
-		addBalanceRequest.setAmount(10);
+		addBalanceRequest.setAmount(BigDecimal.TEN);
 		addBalanceRequest.setMobileNumber("1234567890");
 		addBalanceRequest.setCreditCard(createTestCreditCardRequest());
 

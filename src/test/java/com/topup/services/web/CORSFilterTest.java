@@ -14,6 +14,15 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import com.topup.services.web.filter.CORSFilter;
 
+/**
+ * 
+ * <b>CORSFilterTest</b>
+ *
+ * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class CORSFilterTest {
 
 	private MockFilterChain mockFilterChain;

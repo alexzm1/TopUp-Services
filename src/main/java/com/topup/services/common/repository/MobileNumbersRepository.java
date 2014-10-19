@@ -12,9 +12,15 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Mobile Number mongo's repository
+ * 
+ * <b>MobileNumbersRepository</b>
  *
+ * Mobile Number mongo's repository
+ * 
  * @author alexzm1
+ * @version 1.0
+ * @since 1.0
+ *
  */
 public interface MobileNumbersRepository extends
 		MongoRepository<MobileNumber, String> {
