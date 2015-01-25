@@ -48,7 +48,7 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 	 */
 	@Override
 	protected String getDatabaseName() {
-		return "TopUp";
+		return "jbosswildfly";
 	}
 
 	/**
