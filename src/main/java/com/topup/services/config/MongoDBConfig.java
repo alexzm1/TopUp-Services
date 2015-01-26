@@ -1,8 +1,13 @@
 package com.topup.services.config;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
@@ -49,6 +54,23 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 	@Override
 	protected String getDatabaseName() {
 		return "jbosswildfly";
+	}
+
+	@Override
+	protected UserCredentials getUserCredentials() {
+		try {
+			final Properties dbProperties = PropertiesLoaderUtils
+					.loadAllProperties("db.properties");
+			if (!dbProperties.isEmpty()) {
+				return new UserCredentials(
+						dbProperties.getProperty("db.username"),
+						dbProperties.getProperty("db.password"));
+			}
+			return null;
+		} catch (IOException e) {
+			return null;
+		}
+
 	}
 
 	/**
