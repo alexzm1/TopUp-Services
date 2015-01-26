@@ -56,6 +56,14 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 		return "jbosswildfly";
 	}
 
+	/**
+	 * If the db.properties file is available in the classpath (usually only in
+	 * the openshift servers), it will setup a {@link UserCredentials} object
+	 * with the included username and password, else it will return a
+	 * {@code null} object
+	 * 
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected UserCredentials getUserCredentials() {
 		try {
