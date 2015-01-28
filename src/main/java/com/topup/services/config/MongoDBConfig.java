@@ -1,11 +1,12 @@
 package com.topup.services.config;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -14,6 +15,8 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.WriteConcern;
 
 /**
  * 
@@ -38,19 +41,8 @@ import com.mongodb.Mongo;
 @EnableMongoRepositories(basePackages = "com.topup.services.common.repository")
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
-	private final static Logger LOG = LoggerFactory.getLogger(MongoDBConfig.class);
-	
-	private Mongo mongo;
-
-	/**
-	 * 
-	 * @param mongo
-	 *            An instance of {@link Mongo}
-	 */
-	@Autowired
-	public void setMongo(Mongo mongo) {
-		this.mongo = mongo;
-	}
+	private final static Logger LOG = LoggerFactory
+			.getLogger(MongoDBConfig.class);
 
 	/**
 	 * {@inheritDoc}
@@ -91,7 +83,27 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Bean
 	public Mongo mongo() throws Exception {
+		final Properties dbProperties = PropertiesLoaderUtils
+				.loadAllProperties("db.properties");
+		if (!dbProperties.isEmpty()) {
+			return createMongo(dbProperties.getProperty("db.host"));
+		}
+		return createMongo("127.0.0.1");
+	}
+
+	/**
+	 * Creates a {@link Mongo} instance from the received host
+	 * 
+	 * @param host
+	 * @return An instance of {@link Mongo}
+	 * @throws UnknownHostException
+	 */
+	private Mongo createMongo(String host) throws UnknownHostException {
+		LOG.info(String.format("Mongo DB connected to host: %s", host));
+		final Mongo mongo = new MongoClient(host);
+		mongo.setWriteConcern(WriteConcern.SAFE);
 		return mongo;
 	}
 
