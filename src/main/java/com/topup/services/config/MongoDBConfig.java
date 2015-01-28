@@ -3,6 +3,8 @@ package com.topup.services.config;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +38,8 @@ import com.mongodb.Mongo;
 @EnableMongoRepositories(basePackages = "com.topup.services.common.repository")
 public class MongoDBConfig extends AbstractMongoConfiguration {
 
+	private final static Logger LOG = LoggerFactory.getLogger(MongoDBConfig.class);
+	
 	private Mongo mongo;
 
 	/**
@@ -70,10 +74,12 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 			final Properties dbProperties = PropertiesLoaderUtils
 					.loadAllProperties("db.properties");
 			if (!dbProperties.isEmpty()) {
+				LOG.info("Using custom MongoDB settings");
 				return new UserCredentials(
 						dbProperties.getProperty("db.username"),
 						dbProperties.getProperty("db.password"));
 			}
+			LOG.info("Using default MongoDB settings");
 			return null;
 		} catch (IOException e) {
 			return null;
