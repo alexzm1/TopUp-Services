@@ -4,11 +4,8 @@
 .project
 .settings/
 .md~
-<<<<<<< HEAD
 .springBeans
-=======
 .idea/
 TopUp-Services.iml
 .dpl/
 /deployments/*.*
->>>>>>> master
