@@ -8,3 +8,4 @@
 TopUp-Services.iml
 .dpl/
 /deployments/*.*
+/bin
