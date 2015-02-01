@@ -1,8 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<b:beans xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/security/oauth http://www.springframework.org/schema/security/spring-security-oauth.xsd 
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- Spring Annotation Driven Components -->
+	<context:annotation-config />
 
-</beans>
+	<!-- Global Security Settings -->
+	<global-method-security pre-post-annotations="enabled" />
+
+	<!-- Form Login Security -->
+	<http use-expressions="true" access-denied-page="/login.jsp">
+		<form-login authentication-failure-url="/login.jsp"
+			default-target-url="/index.jsp" login-page="/login.jsp"
+			login-processing-url="/login.do" username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/login.jsp?out=1" logout-url="/logout.do" />
+
+		<intercept-url requires-channel="any" pattern="/login.jsp"
+			access="permitAll()" />
+		<intercept-url requires-channel="any" pattern="/**"
+			access="hasRole('ROLE_USER')" />
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider>
+			<user-service>
+				<user name="user" password="user" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- OAuth 1.0 3-Legged Security -->
+	<b:bean id="oAuthAuthenticationHandler"
+		class="org.springframework.security.oauth.provider.DefaultAuthenticationHandler" />
+	<b:bean id="consumerDetailsService"
+		class="com.topup.services.security.service.OAuthConsumerDetailsService" />
+	<b:bean id="tokenServices"
+		class="com.topup.services.security.service.OAuthProviderTokenServicesImpl" />
+
+	<oauth:provider consumer-details-service-ref="consumerDetailsService"
+		token-id-param="oauth_token" token-services-ref="tokenServices" user-approval-url="/api/oauth/confirm_access"
+		authenticate-token-url="/api/oauth/authorize_token" access-token-url="api/oauth/access_token"
+		auth-handler-ref="oAuthAuthenticationHandler" access-granted-url="/request_token_authorized.jsp"
+		require10a="true" />
+
+</b:beans>

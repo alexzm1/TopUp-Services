@@ -2,6 +2,7 @@ package com.topup.services.security.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenImpl;
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenServices;
@@ -23,7 +24,8 @@ import com.topup.services.security.repository.TokenRepository;
 public class OAuthProviderTokenServicesImpl extends
 		RandomValueProviderTokenServices implements OAuthProviderTokenServices {
 
-	private final TokenRepository tokenRepository;
+	// TODO: Autowire this and made it final
+	private TokenRepository tokenRepository;
 
 	private final Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer;
 
@@ -39,7 +41,7 @@ public class OAuthProviderTokenServicesImpl extends
 			TokenRepository tokenRepository,
 			Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer,
 			Transformer<OAuthProviderTokenImpl, Token> oAuthProviderTokenImplToTokenTransformer) {
-		this.tokenRepository = tokenRepository;
+		// this.tokenRepository = tokenRepository;
 		this.tokenToOAuthProviderTokenImplTransformer = tokenToOAuthProviderTokenImplTransformer;
 		this.oAuthProviderTokenImplToTokenTransformer = oAuthProviderTokenImplToTokenTransformer;
 	}
@@ -48,7 +50,7 @@ public class OAuthProviderTokenServicesImpl extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Cacheable("tokens")
+	@Cacheable(value = "tokens", key = "#token")
 	protected OAuthProviderTokenImpl readToken(String token) {
 		final Token tokenEntity = tokenRepository.findById(token).get(0);
 		final OAuthProviderTokenImpl oAuthToken = tokenToOAuthProviderTokenImplTransformer
@@ -78,6 +80,7 @@ public class OAuthProviderTokenServicesImpl extends
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CacheEvict(value = "token", key = "#tokenValue")
 	protected OAuthProviderTokenImpl removeToken(String tokenValue) {
 		final OAuthProviderTokenImpl token = readToken(tokenValue);
 		tokenRepository.delete(tokenValue);
