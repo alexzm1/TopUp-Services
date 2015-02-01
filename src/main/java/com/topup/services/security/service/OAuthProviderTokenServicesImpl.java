@@ -24,8 +24,7 @@ import com.topup.services.security.repository.TokenRepository;
 public class OAuthProviderTokenServicesImpl extends
 		RandomValueProviderTokenServices implements OAuthProviderTokenServices {
 
-	// TODO: Autowire this and made it final
-	private TokenRepository tokenRepository;
+	private final TokenRepository tokenRepository;
 
 	private final Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer;
 
@@ -41,7 +40,7 @@ public class OAuthProviderTokenServicesImpl extends
 			TokenRepository tokenRepository,
 			Transformer<Token, OAuthProviderTokenImpl> tokenToOAuthProviderTokenImplTransformer,
 			Transformer<OAuthProviderTokenImpl, Token> oAuthProviderTokenImplToTokenTransformer) {
-		// this.tokenRepository = tokenRepository;
+		this.tokenRepository = tokenRepository;
 		this.tokenToOAuthProviderTokenImplTransformer = tokenToOAuthProviderTokenImplTransformer;
 		this.oAuthProviderTokenImplToTokenTransformer = oAuthProviderTokenImplToTokenTransformer;
 	}

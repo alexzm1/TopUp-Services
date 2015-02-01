@@ -2,16 +2,13 @@ package com.topup.services.security.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.topup.services.security.domain.model.UserLogin;
-import com.topup.services.security.domain.model.UserProfile;
-import com.topup.services.security.service.UserProfileService;
 
 /**
  * 
@@ -26,23 +23,16 @@ import com.topup.services.security.service.UserProfileService;
 @RequestMapping("/api/user")
 public class UserResource {
 
-	private UserProfileService userProfileService;
+	private final FilterChainProxy proxy;
 
-	/**
-	 * 
-	 * <b>Constructor</b>
-	 *
-	 * @param userProfileService
-	 *            An instance of {@link UserProfileService}
-	 */
 	@Autowired
-	public UserResource(UserProfileService userProfileService) {
-		this.userProfileService = userProfileService;
+	public UserResource(FilterChainProxy proxy) {
+		this.proxy = proxy;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String login(UserLogin login) {
-		return login.getUser();
+	@RequestMapping(method = RequestMethod.GET, value = "/login")
+	public String login() {
+		return proxy.toString();
 	}
 
 	/**
@@ -54,8 +44,8 @@ public class UserResource {
 	@PreAuthorize("hasRole('ROLE_DUMMY')")
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	@ResponseStatus(HttpStatus.OK)
-	public UserProfile getProfile() {
-		return userProfileService.getUserProfile();
+	public Object getProfile(@AuthenticationPrincipal Object object) {
+		return object;
 	}
 
 }

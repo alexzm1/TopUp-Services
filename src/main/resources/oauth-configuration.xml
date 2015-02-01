@@ -24,8 +24,8 @@
 
 		<intercept-url requires-channel="any" pattern="/login.jsp"
 			access="permitAll()" />
-		<intercept-url requires-channel="any" pattern="/**"
-			access="hasRole('ROLE_USER')" />
+		<intercept-url requires-channel="any"
+			pattern="/api/oauth/oauth_request_token" access="permitAll()" />
 	</http>
 
 	<authentication-manager alias="authenticationManager">
@@ -45,7 +45,8 @@
 		class="com.topup.services.security.service.OAuthProviderTokenServicesImpl" />
 
 	<oauth:provider consumer-details-service-ref="consumerDetailsService"
-		token-id-param="oauth_token" token-services-ref="tokenServices" user-approval-url="/api/oauth/confirm_access"
+		token-id-param="oauth_token" token-services-ref="tokenServices"
+		request-token-url="/api/oauth/oauth_request_token" user-approval-url="/api/oauth/confirm_access"
 		authenticate-token-url="/api/oauth/authorize_token" access-token-url="api/oauth/access_token"
 		auth-handler-ref="oAuthAuthenticationHandler" access-granted-url="/request_token_authorized.jsp"
 		require10a="true" />

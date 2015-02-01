@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -32,6 +33,9 @@ public class WebApp implements WebApplicationInitializer {
 		final AnnotationConfigWebApplicationContext applicationContext = getApplicationContext();
 		servletContext
 				.addListener(new ContextLoaderListener(applicationContext));
+		servletContext.addFilter("springSecurityFilterChain",
+				new DelegatingFilterProxy("springSecurityFilterChain"))
+				.addMappingForUrlPatterns(null, false, "/*");
 		setServlet(servletContext, applicationContext);
 
 	}
