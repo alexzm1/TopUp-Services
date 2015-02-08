@@ -25,7 +25,9 @@ public class OAuthProviderTokenImplToTokenTransformer implements
 		tokenEntity.setId(token.getValue());
 		tokenEntity.setConsumerKey(token.getConsumerKey());
 		tokenEntity.setVerifier(token.getVerifier());
-		tokenEntity.setUserName(token.getUserAuthentication().getName());
+		if (token.getUserAuthentication() != null) {
+			tokenEntity.setUserName(token.getUserAuthentication().getName());
+		}
 		tokenEntity.setConsumerKey(token.getSecret());
 		tokenEntity.setTimestamp(token.getTimestamp());
 		tokenEntity.setAccessToken(token.isAccessToken());
