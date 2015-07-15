@@ -1,6 +1,8 @@
 TopUp-Services
 ==============
 
+[![Join the chat at https://gitter.im/alexzm1/TopUp-Services](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alexzm1/TopUp-Services?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 API required by the Top UP application to validate the Mobile Numbers and do Top Ups
 
 

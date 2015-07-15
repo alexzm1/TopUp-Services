@@ -10,3 +10,5 @@ TopUp-Services.iml
 .dpl/
 /deployments/*.*
 /bin
+.springBeans
+
