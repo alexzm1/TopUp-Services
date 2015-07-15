@@ -22,7 +22,7 @@ public class AddBalanceRequest {
 	private String mobileNumber;
 
 	@NotNull
-	@Min(value = 1)
+	@Min(value = 5)
 	private BigDecimal amount;
 
 	@Valid
