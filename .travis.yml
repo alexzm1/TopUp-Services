@@ -12,3 +12,5 @@ deploy:
   domain: topup
   on:
     repo: alexzm1/TopUp-Services
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report -DrepoToken=3IFDpaYnulREk791FVdqdETYtdPUpgyz7
