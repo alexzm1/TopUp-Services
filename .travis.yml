@@ -1,16 +1,16 @@
 sudo: false
 language: java
-script: mvn package -Popenshift
+script: mvn package
 jdk:
-- oraclejdk8
-deploy:
-  provider: openshift
-  user: alexzm1@gmail.com
-  password:
-    secure: npeWojBYgprNrD68MvCDN/0xXdmck2YqQpTXHy5gF+MsylS78AX78A/ZoMTvhkctic8Ckw+fUcXYCnfrdXCTdVpc6U3r3RU4gob/fU5GsSXKQOeUs/8gzA4NxNC+0CPzl2ohVoWia0+h/xLj/MC+nW3bWeTsg52IjRy30357pz8=
-  app: jbosswildfly
-  domain: topup
-  on:
-    repo: alexzm1/TopUp-Services
+  - oraclejdk11
+#deploy:
+#  provider: openshift
+#  user: alexzm1@gmail.com
+#  password:
+#    secure: npeWojBYgprNrD68MvCDN/0xXdmck2YqQpTXHy5gF+MsylS78AX78A/ZoMTvhkctic8Ckw+fUcXYCnfrdXCTdVpc6U3r3RU4gob/fU5GsSXKQOeUs/8gzA4NxNC+0CPzl2ohVoWia0+h/xLj/MC+nW3bWeTsg52IjRy30357pz8=
+#  app: jbosswildfly
+#  domain: topup
+#  on:
+#    repo: alexzm1/TopUp-Services
 after_success:
   - mvn clean cobertura:cobertura coveralls:report -DrepoToken=3IFDpaYnulREk791FVdqdETYtdPUpgyz7
