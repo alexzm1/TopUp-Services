@@ -1,46 +1,43 @@
 package com.topup.services.telephone.translator;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.telephone.domain.model.MobileStatus;
 import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
- * 
  * <b>MobileNumberToMobileTransformerTest</b>
  *
  * @author alexzm1
  * @version 1.0
  * @since 1.0
- *
  */
 public class MobileNumberToMobileTransformerTest {
 
-	private MobileNumberToMobileTransformer mobileNumberToMobileTransformer = new MobileNumberToMobileTransformer();
+    private MobileNumberToMobileTransformer mobileNumberToMobileTransformer = new MobileNumberToMobileTransformer();
 
-	@Test
-	public void testStatusActive() {
+    @Test
+    public void testStatusActive() {
 
-		MobileNumber mobileNumber = new MobileNumber();
-		mobileNumber.setNumber("8046789719");
-		mobileNumber.setStatus(MobileStatus.ACTIVE.toString());
+        MobileNumber mobileNumber = new MobileNumber();
+        mobileNumber.setNumber("8046789719");
+        mobileNumber.setStatus(MobileStatus.ACTIVE.toString());
 
-		assertEquals(MobileStatus.ACTIVE, mobileNumberToMobileTransformer
-				.transform(mobileNumber).getStatus());
+        assertEquals(MobileStatus.ACTIVE, mobileNumberToMobileTransformer
+                .transform(mobileNumber).getStatus());
 
-	}
+    }
 
-	@Test
-	public void testStatusInvalid() {
+    @Test
+    public void testStatusInvalid() {
 
-		MobileNumber mobileNumber = new MobileNumber();
-		mobileNumber.setNumber("8046789719");
+        MobileNumber mobileNumber = new MobileNumber();
+        mobileNumber.setNumber("8046789719");
 
-		assertEquals(MobileStatus.INVALID, mobileNumberToMobileTransformer
-				.transform(mobileNumber).getStatus());
+        assertEquals(MobileStatus.INVALID, mobileNumberToMobileTransformer
+                .transform(mobileNumber).getStatus());
 
-	}
+    }
 }

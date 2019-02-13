@@ -7,9 +7,8 @@ API required by the Top UP application to validate the Mobile Numbers and do Top
 
 
 ##Requirements
-Java 8+
-Apache tomcat 7+
-MongoDB 2.6.x+
+Java 11+
+MongoDB 4.0.x+
 
 [![Build Status](https://travis-ci.org/alexzm1/TopUp-Services.svg?branch=master)](https://travis-ci.org/alexzm1/TopUp-Services)
 [![Coverage Status](https://coveralls.io/repos/alexzm1/TopUp-Services/badge.svg?branch=oauth-implementation-3&service=github)](https://coveralls.io/github/alexzm1/TopUp-Services?branch=oauth-implementation-3)

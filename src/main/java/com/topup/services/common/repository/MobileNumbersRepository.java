@@ -7,31 +7,28 @@
 
 package com.topup.services.common.repository;
 
-import java.util.List;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
+
 /**
- * 
  * <b>MobileNumbersRepository</b>
- *
+ * <p>
  * Mobile Number mongo's repository
- * 
+ *
  * @author alexzm1
  * @version 1.0
  * @since 1.0
- *
  */
 public interface MobileNumbersRepository extends
-		MongoRepository<MobileNumber, String> {
+        MongoRepository<MobileNumber, String> {
 
-	/**
-	 * Find a list of MobileNumbers from a mobile number
-	 * 
-	 * @param number
-	 *            Number
-	 * @return A List of MobileNumber
-	 */
-	List<MobileNumber> findByNumber(String number);
+    /**
+     * Find a list of MobileNumbers from a mobile number
+     *
+     * @param number Number
+     * @return A List of MobileNumber
+     */
+    List<MobileNumber> findByNumber(String number);
 
 }
