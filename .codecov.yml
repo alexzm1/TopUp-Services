@@ -1,0 +1,4 @@
+ignore:
+  - "src/main/java/com/topup/services/telephone/domain/model/"
+  - "src/master/src/main/java/com/topup/services/common/repository/MobileNumber.java"
+  - "src/main/java/com/topup/services/user/domain/model/"
