@@ -4,3 +4,4 @@ ignore:
   - "src/main/java/com/topup/services/user/domain/model/"
   - "src/main/java/com/topup/services/common/exception/"
   - "src/main/java/com/topup/services/web/exception"
+  - "src/main/java/com/topup/services/config"
