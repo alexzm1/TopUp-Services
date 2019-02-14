@@ -1,8 +1,6 @@
 sudo: false
 language: java
-script:
-  -mvn package
-  -mvn clean test jacoco:report
+script: "mvn clean test jacoco:report"
 jdk:
   - oraclejdk11
 #deploy:
