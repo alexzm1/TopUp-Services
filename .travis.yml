@@ -1,6 +1,8 @@
 sudo: false
 language: java
-script: mvn package
+script:
+  -mvn package
+  -mvn clean test jacoco:report
 jdk:
   - oraclejdk11
 #deploy:
@@ -13,4 +15,4 @@ jdk:
 #  on:
 #    repo: alexzm1/TopUp-Services
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report -DrepoToken=3IFDpaYnulREk791FVdqdETYtdPUpgyz7
+  - bash <(curl -s https://codecov.io/bash) -t 22d15074-0115-405e-91ac-adc8d45a26cb
