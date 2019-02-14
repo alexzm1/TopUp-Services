@@ -60,9 +60,8 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        Properties dbProperties = null;
         try {
-            dbProperties = PropertiesLoaderUtils
+            var dbProperties = PropertiesLoaderUtils
                     .loadAllProperties("db.properties");
             MongoCredential credential = MongoCredential.createScramSha1Credential(
                     dbProperties.getProperty("db.username"),
