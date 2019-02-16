@@ -4,14 +4,14 @@
 package com.topup.services.common.exception;
 
 /**
- * <b>MobileNumberInactive</b>
+ * <b>MobileNumberInactiveException</b>
  *
  * @author alexzm1
  * @version 1.0
  * @since 1.0
  *
  */
-public class MobileNumberInactive extends RuntimeException {
+public class MobileNumberInactiveException extends RuntimeException {
 
     /**
      * serialVersionUID
@@ -24,10 +24,10 @@ public class MobileNumberInactive extends RuntimeException {
      *
      * @param mobileNumber
      */
-    public MobileNumberInactive(String mobileNumber) {
+    public MobileNumberInactiveException(String mobileNumber) {
         super(
                 String.format(
-                        "Mobile Number %d is currently in an inactive state of service, please try again with a valid mobile number",
+                        "Mobile Number %s is currently in an inactive state of service, please try again with a valid mobile number",
                         mobileNumber));
     }
 }

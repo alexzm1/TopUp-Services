@@ -3,8 +3,8 @@
  */
 package com.topup.services.telephone.service;
 
-import com.topup.services.common.exception.MobileNumberInactive;
-import com.topup.services.common.exception.MobileNumberInvalid;
+import com.topup.services.common.exception.MobileNumberInactiveException;
+import com.topup.services.common.exception.MobileNumberInvalidException;
 import com.topup.services.common.exception.MobileNumberNotFoundException;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.common.repository.MobileNumbersRepository;
@@ -66,7 +66,6 @@ public class AccountServiceImpl implements AccountService {
                 .getMobileNumber());
 
         if (results.isEmpty()) {
-
             throw new MobileNumberNotFoundException(request.getMobileNumber());
         }
 
@@ -74,17 +73,13 @@ public class AccountServiceImpl implements AccountService {
 
         switch (MobileStatus.valueFromString(mobileNumber.getStatus())) {
             case ACTIVE:
-
                 template.save(mobileNumber.addBalance(request.getAmount()));
                 break;
             case INVALID:
-
-                throw new MobileNumberInvalid(request.getMobileNumber());
+                throw new MobileNumberInvalidException(request.getMobileNumber());
             case INACTIVE:
             case NO_REGISTER:
-
-                throw new MobileNumberInactive(request.getMobileNumber());
-
+                throw new MobileNumberInactiveException(request.getMobileNumber());
         }
 
     }

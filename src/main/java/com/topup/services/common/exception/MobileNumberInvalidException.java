@@ -1,13 +1,13 @@
 package com.topup.services.common.exception;
 
 /**
- * <b>MobileNumberInvalid</b>
+ * <b>MobileNumberInvalidException</b>
  *
  * @author alexzm1
  * @version 1.0
  * @since 1.0
  */
-public class MobileNumberInvalid extends RuntimeException {
+public class MobileNumberInvalidException extends RuntimeException {
 
     /**
      * serialVersionUID
@@ -19,10 +19,10 @@ public class MobileNumberInvalid extends RuntimeException {
      *
      * @param mobileNumber
      */
-    public MobileNumberInvalid(String mobileNumber) {
+    public MobileNumberInvalidException(String mobileNumber) {
         super(
                 String.format(
-                        "Mobile Number %d is currently in an invalid state service, please try again with a valid mobile number",
+                        "Mobile Number %s is currently in an invalid state service, please try again with a valid mobile number",
                         mobileNumber));
     }
 
