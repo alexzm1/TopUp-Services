@@ -1,8 +1,8 @@
 package com.topup.services.web;
 
 import com.topup.services.web.filter.CORSFilter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * <b>CORSFilterTest</b>
@@ -25,7 +25,7 @@ public class CORSFilterTest {
     private MockHttpServletRequest httpServletRequest;
     private MockHttpServletResponse httpServletResponse;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mockFilterChain = new MockFilterChain();
         httpServletRequest = new MockHttpServletRequest("GET",

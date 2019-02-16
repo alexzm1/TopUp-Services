@@ -3,9 +3,9 @@ package com.topup.services.telephone.translator;
 import com.topup.services.common.repository.MobileNumber;
 import com.topup.services.telephone.domain.model.MobileStatus;
 import com.topup.services.telephone.transformer.MobileNumberToMobileTransformer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * <b>MobileNumberToMobileTransformerTest</b>
