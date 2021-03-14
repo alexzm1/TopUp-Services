@@ -18,7 +18,7 @@
         <spring.version>5.1.4.RELEASE</spring.version>
         <spring.data.mongo.version>2.1.4.RELEASE</spring.data.mongo.version>
         <junit.version>5.4.0</junit.version>
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.9.10.7</jackson.version>
         <hibernate.version>5.4.1.Final</hibernate.version>
     </properties>
     <name>TopUp-Services</name>
