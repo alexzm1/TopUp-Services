@@ -1,16 +1,7 @@
 sudo: false
 language: java
-script: "mvn clean test jacoco:report"
+script: "./gradlew test"
 jdk:
   - oraclejdk11
-#deploy:
-#  provider: openshift
-#  user: alexzm1@gmail.com
-#  password:
-#    secure: npeWojBYgprNrD68MvCDN/0xXdmck2YqQpTXHy5gF+MsylS78AX78A/ZoMTvhkctic8Ckw+fUcXYCnfrdXCTdVpc6U3r3RU4gob/fU5GsSXKQOeUs/8gzA4NxNC+0CPzl2ohVoWia0+h/xLj/MC+nW3bWeTsg52IjRy30357pz8=
-#  app: jbosswildfly
-#  domain: topup
-#  on:
-#    repo: alexzm1/TopUp-Services
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t 22d15074-0115-405e-91ac-adc8d45a26cb
