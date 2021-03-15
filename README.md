@@ -11,7 +11,7 @@ Java 11+
 MongoDB 4.0.x+
 
 [![Build Status](https://travis-ci.org/alexzm1/TopUp-Services.svg?branch=master)](https://travis-ci.org/alexzm1/TopUp-Services)
-[![codecov](https://codecov.io/gh/alexzm1/TopUp-Services/branch/master/graph/badge.svg)](https://codecov.io/gh/alexzm1/TopUp-Services)
+[![Build Status](https://travis-ci.com/alexzm1/TopUp-Services.svg?branch=master)](https://travis-ci.com/alexzm1/TopUp-Services)
 
 ##Install Mongo Database:
 
